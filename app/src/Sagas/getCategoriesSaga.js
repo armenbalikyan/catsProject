@@ -1,7 +1,6 @@
-import { take, put, call, takeLatest } from 'redux-saga/effects'
-import { getCategoriesFailure,  getCategoriesSuccess, GET_CATEGORIES_LOADING } from '../Actions/categories.actions';
-import {getCategories, getCats} from '../Api/Api';
-import {GET_CATS_LOADING, getCatsFailure, getCatsSuccess} from "../Actions/cats.actions";
+import {call, put, take, takeLatest} from 'redux-saga/effects'
+import {GET_CATEGORIES_LOADING, getCategoriesFailure, getCategoriesSuccess} from '../Actions/categories.actions';
+import {getCategories} from '../Api/Api';
 
 
 function* getCategorySaga() {

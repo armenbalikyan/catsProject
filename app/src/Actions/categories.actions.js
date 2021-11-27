@@ -4,14 +4,14 @@ export const GET_CATEGORIES_FAILURE = 'GET_CATEGORIES_FAILURE';
 
 
 export const getCategoriesLoading = {
-  type: GET_CATEGORIES_LOADING
+    type: GET_CATEGORIES_LOADING
 };
 
 export const getCategoriesSuccess = (data) => ({
-  type: GET_CATEGORIES_SUCCESS,
-  payload: data,
+    type: GET_CATEGORIES_SUCCESS,
+    payload: data,
 });
 
 export const getCategoriesFailure = {
-  type: GET_CATEGORIES_FAILURE,
+    type: GET_CATEGORIES_FAILURE,
 };

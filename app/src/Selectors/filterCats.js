@@ -1,4 +1,4 @@
-import { createSelector } from "reselect";
+import {createSelector} from "reselect";
 
 const getData = (state) => state.cats;
 const getCatsData = createSelector(getData, (data) => data.catsData);
@@ -10,11 +10,11 @@ const mapCat = (cat) => {
     }
 }
 
-export const catsNames = createSelector(
-  getCatsData,
-  (catsData) => {
-    return catsData.map(mapCat);
-  }
+export const mappedCats = createSelector(
+    getCatsData,
+    (catsData) => {
+        return catsData.map(mapCat);
+    }
 );
 
 

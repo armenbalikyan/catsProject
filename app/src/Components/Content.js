@@ -1,9 +1,8 @@
 import React from "react";
 import CategoriesLinkList from "./CategoriesLinkList";
-import {logDOM} from "@testing-library/react";
 import CatsLinkList from "./CatsLinkList";
 
-const Content = ({categories, cats,handleCategoryClick}) => {
+const Content = ({categories, cats, handleCategoryClick, handleLoadMoreClick}) => {
     return (
         <div id='globalContainer'>
             <CategoriesLinkList categories={categories} handleCategoryClick={handleCategoryClick}/>
@@ -11,7 +10,7 @@ const Content = ({categories, cats,handleCategoryClick}) => {
                 <div className="imageContainer">
                     <CatsLinkList cats={cats}/>
                 </div>
-                <button>Load More</button>
+                <button id="loadMoreButton" onClick={() => handleLoadMoreClick()}>Load More</button>
             </div>
         </div>
     );

@@ -3,9 +3,10 @@ export const GET_CATS_SUCCESS = 'GET_CATS_SUCCESS';
 export const GET_CATS_FAILURE = 'GET_CATS_FAILURE';
 
 
-export const getCatsLoading = (categoryId) =>({
+export const getCatsLoading = (categoryId, page) => ({
     type: GET_CATS_LOADING,
-    categoryId : categoryId,
+    categoryId: categoryId,
+    page: page
 });
 
 export const getCatsSuccess = (data) => ({

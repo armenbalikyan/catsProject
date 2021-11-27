@@ -1,2 +1,2 @@
-export { watchGetCategories } from './getCategoriesSaga';
-export { watchGetCats } from './getCatsSaga';
+export {watchGetCategories} from './getCategoriesSaga';
+export {watchGetCats} from './getCatsSaga';

@@ -11,7 +11,7 @@ const mapCategory = (category) => {
     }
 }
 
-export const categoriesNames = createSelector(
+export const mappedCategories = createSelector(
     getCategoriesData,
     (categoriesData) => {
         return categoriesData.map(mapCategory);

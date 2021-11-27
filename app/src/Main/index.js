@@ -1,46 +1,51 @@
 import React, {useEffect, useState} from "react";
 import Header from "../Components/Header";
-import { connect } from "react-redux";
-import { getCategoriesLoading } from "../Actions/categories.actions";
-import { categoriesNames } from "../Selectors/filterCategories";
+import {useDispatch, useSelector} from "react-redux";
+import {getCategoriesLoading} from "../Actions/categories.actions";
+import {mappedCategories} from "../Selectors/filterCategories";
 import Content from "../Components/Content";
-import {deprecate} from "@testing-library/jest-dom/dist/utils";
 import {getCatsLoading} from "../Actions/cats.actions";
-import {catsNames} from "../Selectors/filterCats";
-import {getCats} from "../Api/Api";
-import {id} from "../Components/Link";
+import {mappedCats} from "../Selectors/filterCats";
 
-let iddf;
-const Main = ({ categories, cats, getCategoriesLoading, getCatsLoading, loading }) => {
-  const [selectedCategoryId,setSelectedCategoryId] = useState(undefined);
-  useEffect(() => {
-    getCategoriesLoading();
-  }, []);
-  useEffect(()=>{
-    getCatsLoading();
-  },[selectedCategoryId]);
+const Main = () => {
+    const categories = useSelector(state => mappedCategories(state));
+    const newCats = useSelector(state => mappedCats(state));
+    const dispatch = useDispatch();
+    const [selectedCategoryId, setSelectedCategoryId] = useState(undefined);
+    const [cats, setCats] = useState(undefined);
+    const [pageCounter, setPageCounter] = useState(1);
 
-  const handleCategoryClick = (selectedCategoryId) => {
-    iddf = selectedCategoryId;
-    setSelectedCategoryId(selectedCategoryId);
-  }
+    useEffect(() => {
+        dispatch(getCategoriesLoading)
+    }, []);
+    useEffect(() => {
+        dispatch(getCatsLoading());
+    }, []);
 
-  return (
-    <div>
-      <Header />
-        <Content categories={categories} cats={cats} handleCategoryClick={handleCategoryClick}/>
-    </div>
-  );
+    const handleCategoryClick = (selectedCategoryId) => {
+        setSelectedCategoryId(selectedCategoryId);
+        dispatch(getCatsLoading(selectedCategoryId));
+        setCats(newCats)
+    }
+
+    const handleLoadMoreClick = () => {
+        dispatch(getCatsLoading(selectedCategoryId, pageCounter));
+        setPageCounter(pageCounter + 1);
+        if (cats) {
+            setCats([...cats, ...newCats])
+        } else {
+            setCats(newCats);
+        }
+    }
+
+    return (
+        <div>
+            <Header/>
+            <Content categories={categories} cats={cats ? cats : newCats} handleCategoryClick={handleCategoryClick}
+                     handleLoadMoreClick={handleLoadMoreClick}/>
+        </div>
+    );
 };
-const mapStateToProps = (state) => ({
-  categories: categoriesNames(state),
-  cats: catsNames(state),
-  // loading: state.users.gettingUser
-});
 
-const mapDispatchToProps = (dispatch) => ({
-  getCategoriesLoading: () => dispatch(getCategoriesLoading),
-  getCatsLoading: () => dispatch(getCatsLoading),
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default Main;

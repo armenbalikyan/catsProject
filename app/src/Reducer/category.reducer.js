@@ -1,25 +1,25 @@
-import { GET_CATEGORIES_LOADING, GET_CATEGORIES_SUCCESS, GET_CATEGORIES_FAILURE } from '../Actions/categories.actions';
+import {GET_CATEGORIES_FAILURE, GET_CATEGORIES_LOADING, GET_CATEGORIES_SUCCESS} from '../Actions/categories.actions';
 
 const initialState = {
     gettingCategories: false,
     categoriesData: []
 }
 
-export default function categoriesReducer (state = initialState,action){
-    switch (action.type){
+export default function categoriesReducer(state = initialState, action) {
+    switch (action.type) {
         case GET_CATEGORIES_LOADING:
             return {
                 ...state,
                 gettingCategories: true
             }
         case GET_CATEGORIES_SUCCESS:
-            return{
+            return {
                 ...state,
                 gettingCategories: false,
-                categoriesData:  action.payload
+                categoriesData: action.payload
             }
         case GET_CATEGORIES_FAILURE:
-            return{
+            return {
                 ...state,
                 gettingCategories: false,
             }
