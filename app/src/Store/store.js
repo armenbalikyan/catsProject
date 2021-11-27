@@ -13,6 +13,6 @@ const store = createStore(
       applyMiddleware(...middleWare),
     ),
 )
-initSagas(sagaMiddleware)
-console.info('Saga middleware implemented');
+initSagas(sagaMiddleware);
+
 export default store;
